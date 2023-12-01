@@ -1,0 +1,35 @@
+<!--投稿の編集ページ-->
+{%extends 'base.html' %}
+
+{% block body %}
+<br>
+<h1><div style="text-align: center;">詳細ページ</dvi></h1>
+<br>
+<img src="/static/img/winter.jpg" style="width:100%">
+<div style="text-align: center;">
+<form class="m-5" action="/update/{{ post.id }}" method="POST">
+    <div class="form-group pb-3">
+        <label for="title">施設名</label>
+        <input type="text" class="form-control" name="title" style="width: 60%; margin: auto;" value="{{ post.title }}">
+    </div>
+    <div class="form-group pb-3">
+        <label for="place">場所</label>
+        <input type="text" class="form-control" name="place" style="width: 60%; margin: auto;" value="{{ post.place }}">
+    </div>
+    <div class="form-group pb-3">
+        <label for="time">営業時間</label>
+        <input type="text" class="form-control" name="time" style="width: 60%; margin: auto;" value="{{ post.time }}">
+    </div>
+    <div class="form-group pb-3">
+        <label for="money">利用料金</label>
+        <input type="text" class="form-control" name="money" style="width: 60%; margin: auto;" value="{{ post.money }}">
+    </div>
+    <div class="form-group pb-3">
+        <label for="due">利用日、利用予定日</label><br>
+        <input type="date" name="due" value="{{ post.due.date() }}" required>
+    </div>
+    <a class="btn btn-outline-dark btn-lg m-5" href="/" role="button"><img src="/static/img/home.png" style="max-width: 30px; max-height: 30px;"></a>
+    <button type="submit" class="btn btn-outline-primary btn-lg m-5"><img src="/static/img/update2.png" style="max-width: 20px; max-height: 20px;"></a>
+</form>
+</div>
+{% endblock %}

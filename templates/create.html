@@ -1,0 +1,52 @@
+{%extends 'base.html' %}
+
+{% block body %}
+<br>
+<h1><div style="text-align: center;">投稿作成ページ</dvi></h1>
+<br>
+<img src="static/img/spring.jpg" style="width:100%">
+<div style="text-align: center;">
+{% if current_user.is_authenticated %}
+<form class="m-5" action="/create" method="POST">
+    <!-- 施設名 -->
+    <div class="form-group pb-3">
+        <label for="title">施設名</label>
+        <input type="text" class="form-control" name="title" style="width: 60%; margin: auto;" required>
+    </div>
+    <!-- 場所 -->
+    <div class="form-group pb-3">
+        <label for="place">住所</label>
+        <input type="text" class="form-control" name="place" style="width: 60%; margin: auto;" required>
+    </div>
+    <!-- 営業時間 -->
+    <div class="form-group pb-3">
+        <label for="time">営業時間</label>
+        <input type="text" class="form-control" name="time" style="width: 60%; margin: auto;" required>
+    </div>
+    <!-- 値段 -->
+    <div class="form-group pb-3">
+        <label for="money">利用料金</label>
+        <input type="text" class="form-control" name="money" style="width: 60%; margin: auto;" required>
+    </div>
+    <!-- 詳細 -->
+    <div class="form-group pb-3">
+        <label for="detail">設備詳細</label>
+        <input type="text" class="form-control" name="detail" style="width: 60%; margin: auto;">
+    </div>
+    <!-- 日付 -->
+    <div class="form-group pb-3">
+        <label for="due">利用日、利用予定日</label><br>
+        <input type="date" name="due" required>
+    </div>
+    <a class="btn btn-outline-dark btn-lg m-5" href="/" role="button"><img src="/static/img/home.png" style="max-width: 30px; max-height: 30px;"></a>
+    <button type="submit" class="btn btn-outline-primary btn-lg m-5"><img src="/static/img/update2.png" style="max-width: 20px; max-height: 20px;"></a>
+</form>
+{% else %}
+<img src="/static/img/sorry.png" style="max-height: 60px;">
+<br>
+<h2>アカウントでログインしないと新規投稿は行えません。ごめんね。</h2>
+<br> 
+{% endif %}
+</div>
+{% endblock %}
+

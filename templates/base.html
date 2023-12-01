@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <title>Document</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light p-3">
+        <!--<a class="navbar-brand" href="/">-->
+        <!--<a href="https://github.com/kobatake-R">-->
+        <a href="/">  
+          <img class="navbar-brand" href="/" src="{{ url_for('static', filename='img/StudyPlace.png') }}" style="max-width: 200px; max-height: 200px;">
+        </a>
+          <!--<img class="navbar-brand" href="/" src="./img/StudyPlace.svg">-->
+        <!--<a class="navbar-brand" href="/" style="font-size: 3rem;">Study Place</a>-->
+        {% if current_user.is_authenticated %}
+          <h5 style="margin-right: 20px;">ログイン中：{{ current_user.username }} さん</h5>
+        {% else %}
+          <h5>ログアウト中：ゲストさん</h5>
+        {% endif %}
+    </nav>
+    {% block body %}{% endblock %}
+    <footer style="background-color: #24292e; color: #fff; font-size: 1.0rem; padding: 2px 5px; text-align: center;">
+      <p>&copy; 2022 Kobatake Some Rights Reserved</p>
+    </footer>
+</body>
+</html>

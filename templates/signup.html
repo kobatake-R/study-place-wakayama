@@ -1,0 +1,27 @@
+<!--新規作成用ページ-->
+{%extends 'base.html' %}
+
+{% block body %}
+<br>
+<h1><div style="text-align: center;">新規登録</dvi></h1>
+<br>
+<div style="text-align: center;">
+<img src="/static/img/signup.png" style="max-height: 60px;">
+<form method="POST">
+    
+    <!-- メールアドレス -->
+    <div class="form-group pb-3">
+        <label for="username">メールアドレス</label>
+        <input type="text" class="form-control" name="username" style="width: 60%; margin: auto;" required>
+    </div>
+    <!-- パスワード -->
+    <div class="form-group pb-3">
+        <label for="password">パスワード</label>
+        <input type="password" class="form-control" name="password" style="width: 60%; margin: auto;" required>
+    </div>
+    <a class="btn btn-outline-dark btn-lg m-5" href="/" role="button"><img src="/static/img/home.png" style="max-width: 30px; max-height: 30px;"></a>
+    <button type="submit" class="btn btn-warning btn-lg m-5" style="max-height: 60px;">新規登録</button>
+</form>
+</div>
+{% endblock %}
+

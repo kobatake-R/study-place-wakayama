@@ -1,0 +1,101 @@
+<!-- メインページ -->
+{%extends 'base.html' %}
+
+{% block body %}
+<br>
+<h1><div style="text-align: center;">トップページ</dvi></h1>
+<br>
+<img src="static/img/fall.jpg" style="width:100%">
+
+<div style="text-align: center;">
+<a class="btn btn-warning m-5" href="/signup" role="button">新規登録</a>
+{% if current_user.is_authenticated %}
+    <a class="btn btn-secondary m-5" href="/logout" role="button">ログアウト</a>
+{% else %}
+    <a class="btn btn-secondary m-5" href="/login" role="button">ログイン</a>
+{% endif %}
+    <a class="btn btn-primary m-5" href="/create" role="button">新規投稿</a>
+  
+    <!--検索機能を追加-->
+  <form method="post" action="/" style="display: inline-block;">
+    <div class="input-group" style="text-align: center;">
+      <input type="text" name="search" id="search" class="form-control input-group-prepend" id="search" value="{{ search_term }}" placeholder="施設目、住所で検索" style="max-width: 300px;"></input>
+      <span class="input-group-btn input-group-append">
+        <submit type="submit" id="btn-search" class="btn btn-primary"><i class="fas fa-search"></i> 検索</submit>
+      </span>
+    </div>
+  </form>
+</div>
+
+<br>
+<div style="text-align: center;"><!--サイトの説明-->
+  <h2>このサイトの説明</h2>
+  <h5>和歌山の自習室をみんなで共有できるWebサイトです。</h5>
+  <h5>ゲストモードで出来る事：投稿の閲覧、詳細の表示、コメントの投稿</h5>
+  <h5>ログインすると出来る事：自習室の投稿、投稿の編集、削除、サイト主への問い合わせ</h5>
+  <img src="static/img/home.png" style="max-height: 15px;">：トップページに戻る<br>
+  <img src="static/img/New.png" style="max-height: 15px;">：投稿ページへ<br>
+  <img src="static/img/detail.png" style="max-height: 15px;">：投稿の詳細を表示<br>
+  <img src="static/img/update.png" style="max-height: 15px;">：投稿の編集ページへ<br>
+  <img src="static/img/delite.png" style="max-height: 15px;">：投稿の削除<br>
+  <img src="static/img/update2.png" style="max-height: 15px;">：自習室を投稿<br>
+  <img src="static/img/comment.png" style="max-height: 15px;">：コメントの送信<br>
+  <img src="static/img/mail.png" style="max-height: 15px;">：問い合わせの送信<br>
+</div>
+<br>
+
+<div style="text-align: center;">
+<h2>投稿一覧</h2>
+</div>
+<!--投稿の表示-->
+{% for post in posts %}
+<div class="card" style="width: 60%; margin: auto">
+    <div class="card-body">
+        {% if is_recent(post.due, today) %}
+        <div class="alert alert-warning" role="alert">
+            最新の投稿です！
+        </div>
+        {% endif %}
+        <h2 class="card-title">施設名 : {{ post.title }}</h2>
+        <h2 class="card-title">住所 : {{ post.place }}</h2>
+        <h2 class="card-title">営業時間 : {{ post.time }}</h2>
+        <h2 class="card-title">利用料金 : {{ post.money }}</h2>
+        <p>利用日程 : {{ post.due.date() }}</p>
+        <!-- 詳細ページ表示ボタン -->
+        <a class="btn btn-outline-secondary btn-sm" href="/detail/{{ post.id }}" role="button"><img src="static/img/detail.png" style="max-width: 30px; max-height: 30px;"></a>
+        <!-- 投稿編集ボタン -->
+        <a class="btn btn-outline-success btn-sm" href="/update/{{ post.id }}" role="button"><img src="static/img/update.png" style="max-width: 30px; max-height: 30px;"></a>
+        <!-- 投稿削除ボタン -->
+        <a class="btn btn-outline-danger btn-sm" href="/delete/{{ post.id }}" role="button"><img src="static/img/delite.png" style="max-width: 30px; max-height: 30px;"></a>
+    </div>
+  </div>
+
+{% endfor %}
+
+
+
+
+
+<div class="mt-5"><!--問い合わせフォーム-->
+  <div style="text-align: center;">
+    <h2>お問い合わせ</h2>
+    <form method="post" action="/contact" style="width: 60%; margin: auto;">
+      <div class="mb-3" style="text-align: center;">
+        <label for="name" class="form-label">お名前</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="mb-3" style="text-align: center;">
+        <label for="email" class="form-label">メールアドレス</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="mb-3" style="text-align: center;">
+        <label for="message" class="form-label">お問い合わせ内容</label>
+        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-outline-primary"><img src="/static/img/mail.png" style="max-width: 30px; max-height: 30px;"></a>
+    </form>
+  </div>
+</div>
+<br>
+{% endblock %}
+

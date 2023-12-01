@@ -1,0 +1,40 @@
+<!--詳細の表示ページ-->
+{%extends 'base.html' %}
+
+{% block body %}
+<br>
+<h1><div style="text-align: center;">詳細ページ</dvi></h1>
+<br>
+<img src="/static/img/summer.jpg" style="width:100%">
+<h2 class="m-5" style="text-align: center;">詳細</h2>
+<div class="card w-50 mb-3" style="margin: auto">
+    <div class="card-body">
+        <h2 class="card-title">施設名：{{ post.title }}</h2>
+        <h2 class="card-title">住所：{{ post.place }}</h2>
+        <h2 class="card-title">営業時間：{{ post.time }}</h2>
+        <h2 class="card-title">利用料金：{{ post.money }}</h2>
+        <h2 class="card-title">立地URL : <a href="{{ post.place_map_link }}" target="_blank">{{ post.title }}</a></h2>
+        <h2><span class="ml-3" style="font-size: 0.5em">利用日程 : {{ post.due.date() }}</span></h2>
+        <p>{{ post.detail }}</p>
+
+        <h3 class="mt-5">コメント</h3>
+        {% for comment in comments %}
+            <p>{{ comment.text }} - {{ comment.created_at }}</p>
+        {% endfor %}
+
+        <form method="post" action="/detail/{{ post.id }}">
+          <div class="form-group">
+              <label for="comment_text">コメントを追加：</label>
+              <textarea class="form-control" id="comment_text" name="comment_text" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-outline-info btn-sm" ><img src="/static/img/comment.png" style="max-width: 30px; max-height: 30px;"></button>
+        </form>
+        <div class="pt-2">
+          <a class="btn btn-outline-dark btn-sm" href="/" role="button"><img src="/static/img/home.png" style="max-width: 30px; max-height: 30px;"></a>
+          <a class="btn btn-outline-success btn-sm" href="/update/{{ post.id }}" role="button"><img src="/static/img/update.png" style="max-width: 30px; max-height: 30px;"></a>
+          <a class="btn btn-outline-danger btn-sm" href="/delete/{{ post.id }}" role="button"><img src="/static/img/delite.png" style="max-width: 30px; max-height: 30px;"></a>
+        </div>
+    </div>
+  </div>
+{% endblock %}
+
